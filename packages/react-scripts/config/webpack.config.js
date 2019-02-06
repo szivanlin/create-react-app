@@ -35,6 +35,8 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
 
+const lessToJS = require('less-vars-to-js');
+
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
@@ -53,6 +55,13 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 // hello-larkintuckerllc-react-scripts start
 const lessRegex = /\.less$/;
 const lessModuleRegex = /\.module\.less$/;
+const themeVariables = lessToJS(
+  fs.readFileSync(
+    path.resolve(paths.appPath, './assets/antd-custom.less'),
+    'utf8'
+  )
+);
+
 // hello-larkintuckerllc-react-scripts end
 
 // This is the production and development configuration.
@@ -122,6 +131,8 @@ module.exports = function(webpackEnv) {
         loader: require.resolve(preProcessor),
         options: {
           sourceMap: isEnvProduction && shouldUseSourceMap,
+          javascriptEnabled: true,
+          modifyVars: themeVariables, // make your antd custom effective
         },
       });
     }
@@ -357,7 +368,7 @@ module.exports = function(webpackEnv) {
                   'babel-preset-react-app/webpack-overrides'
                 ),
                 // @remove-on-eject-begin
-                babelrc: true,
+                babelrc: false,
                 configFile: false,
                 presets: [require.resolve('babel-preset-react-app')],
                 // Make sure we have a unique cache identifier, erring on the
@@ -389,6 +400,15 @@ module.exports = function(webpackEnv) {
                       },
                     },
                   ],
+                  // hello-larkintuckerllc-react-scripts start
+                  [
+                    require.resolve('babel-plugin-import'),
+                    {
+                      libraryName: 'antd',
+                      style: true,
+                    },
+                  ],
+                  // hello-larkintuckerllc-react-scripts end
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/

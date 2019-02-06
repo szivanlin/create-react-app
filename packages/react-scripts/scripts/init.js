@@ -28,8 +28,7 @@ function helloLarkinTuckerLLCDirections() {
   console.log(chalk.yellow('Hello Larkin & Tucker LLC Directions'));
   console.log('Inside that directory, you can run several commands:');
   console.log();
-  console.log(chalk.cyan(`  yarn add --dev less`));
-  console.log('    Adds support for Less.');
+  console.log(chalk.cyan(`  yarn add antd `));
 }
 // hello-larkintuckerllc-react-scripts end
 
