@@ -23,6 +23,13 @@ const { defaultBrowsers } = require('react-dev-utils/browsersHelper');
 const os = require('os');
 const verifyTypeScriptSetup = require('./utils/verifyTypeScriptSetup');
 
+// hello-larkintuckerllc-react-scripts start
+function helloLarkinTuckerLLCDirections() {
+  console.log(chalk.yellow('Hello Larkin & Tucker LLC Directions'));
+  console.log('Hello World');
+}
+// hello-larkintuckerllc-react-scripts end
+
 function isInGitRepository() {
   try {
     execSync('git rev-parse --is-inside-work-tree', { stdio: 'ignore' });
@@ -256,6 +263,10 @@ module.exports = function(
   }
   console.log();
   console.log('Happy hacking!');
+
+  // hello-larkintuckerllc-react-scripts start
+  helloLarkinTuckerLLCDirections();
+  // hello-larkintuckerllc-react-scripts end
 };
 
 function isReactInstalled(appPackage) {
