@@ -26,7 +26,10 @@ const verifyTypeScriptSetup = require('./utils/verifyTypeScriptSetup');
 // hello-larkintuckerllc-react-scripts start
 function helloLarkinTuckerLLCDirections() {
   console.log(chalk.yellow('Hello Larkin & Tucker LLC Directions'));
-  console.log('Hello World');
+  console.log('Inside that directory, you can run several commands:');
+  console.log();
+  console.log(chalk.cyan(`  yarn add --dev less`));
+  console.log('    Adds support for Less.');
 }
 // hello-larkintuckerllc-react-scripts end
 
