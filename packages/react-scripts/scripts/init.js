@@ -22,6 +22,12 @@ const spawn = require('react-dev-utils/crossSpawn');
 const { defaultBrowsers } = require('react-dev-utils/browsersHelper');
 const os = require('os');
 const verifyTypeScriptSetup = require('./utils/verifyTypeScriptSetup');
+// hello-larkintuckerllc-react-scripts start
+function helloLarkinTuckerLLCDirections() {
+  console.log(chalk.yellow('Hello Larkin & Tucker LLC Directions'));
+  console.log('Hello World');
+}
+// hello-larkintuckerllc-react-scripts end
 
 function isInGitRepository() {
   try {
@@ -219,14 +225,17 @@ module.exports = function(
 
   console.log();
   console.log(`Success! Created ${appName} at ${appPath}`);
-  
+
   console.log(chalk.red('VERY IMPORTANT:'));
-  console.log('Create a .env file at the root of your project with REACT_APP_EMPLOYEE_ID and REACT_APP_POSITION_ID');
-  console.log('  You can find these values in the company dashboard under application settings.');
+  console.log(
+    'Create a .env file at the root of your project with REACT_APP_EMPLOYEE_ID and REACT_APP_POSITION_ID'
+  );
+  console.log(
+    '  You can find these values in the company dashboard under application settings.'
+  );
   console.log('  https://company.bamboohr.com/settings');
-  console.log(); 
-  
-  
+  console.log();
+
   console.log('Inside that directory, you can run several commands:');
   console.log();
   console.log(chalk.cyan(`  ${displayedCommand} start`));
@@ -264,9 +273,10 @@ module.exports = function(
   }
   console.log();
   console.log('Happy hacking!');
-  
- 
-  
+
+  // hello-larkintuckerllc-react-scripts start
+  helloLarkinTuckerLLCDirections();
+  // hello-larkintuckerllc-react-scripts end
 };
 
 function isReactInstalled(appPackage) {
