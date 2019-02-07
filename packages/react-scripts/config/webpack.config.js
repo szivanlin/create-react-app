@@ -35,7 +35,10 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
 
+// hello-larkintuckerllc-react-scripts start
 const lessToJS = require('less-vars-to-js');
+
+// hello-larkintuckerllc-react-scripts end
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';

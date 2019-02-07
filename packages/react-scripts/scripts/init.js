@@ -25,10 +25,12 @@ const verifyTypeScriptSetup = require('./utils/verifyTypeScriptSetup');
 
 // hello-larkintuckerllc-react-scripts start
 function helloLarkinTuckerLLCDirections() {
-  console.log(chalk.yellow('Hello Larkin & Tucker LLC Directions'));
-  console.log('Inside that directory, you can run several commands:');
+  console.log(chalk.yellow('Hello React + Antd + Less Starter'));
+  console.log(
+    'You can cutomize antd theme by assets/antd-custom.less,for example:'
+  );
   console.log();
-  console.log(chalk.cyan(`  yarn add antd `));
+  console.log(chalk.cyan(`  @primary-color: #198c3b `));
 }
 // hello-larkintuckerllc-react-scripts end
 
@@ -102,7 +104,7 @@ module.exports = function(
 
   const useTypeScript = appPackage.dependencies['typescript'] != null;
 
-  // Setup the script rules
+  //  Setup the script rules
   appPackage.scripts = {
     start: 'react-scripts start',
     build: 'react-scripts build',
@@ -173,7 +175,7 @@ module.exports = function(
     command = 'npm';
     args = ['install', '--save', verbose && '--verbose'].filter(e => e);
   }
-  args.push('react', 'react-dom');
+  //args.push('react', 'react-dom');
 
   // Install additional template dependencies, if present
   const templateDependenciesPath = path.join(
@@ -188,6 +190,14 @@ module.exports = function(
       })
     );
     fs.unlinkSync(templateDependenciesPath);
+
+    console.log(`Installing template dependencies using ${command}...`);
+    console.log();
+    const proc = spawn.sync(command, args, { stdio: 'inherit' });
+    if (proc.status !== 0) {
+      console.error(`\`${command} ${args.join(' ')}\` failed`);
+      return;
+    }
   }
 
   // Install react and react-dom for backward compatibility with old CRA cli
