@@ -23,6 +23,29 @@ const { defaultBrowsers } = require('react-dev-utils/browsersHelper');
 const os = require('os');
 const verifyTypeScriptSetup = require('./utils/verifyTypeScriptSetup');
 
+// hello-larkintuckerllc-react-scripts start
+function helloLarkinTuckerLLCDirections() {
+  console.log(chalk.yellow('Hello React + Antd + Apollo Starter'));
+  console.log(
+    'To enable eslint and prettier with airbnb style please intall following:'
+  );
+  console.log();
+
+  console.log(chalk.cyan('yarn add eslint babel-eslint --dev'));
+
+  console.log(chalk.cyan('npx install-peerdeps --dev eslint-config-airbnb'));
+
+  console.log(
+    chalk(
+      'yarn add prettier eslint-config-prettier eslint-plugin-prettier --dev'
+    )
+  );
+
+  console.log();
+  console.log(chalk.cyan(`  @primary-color: #198c3b `));
+}
+// hello-larkintuckerllc-react-scripts end
+
 function isInGitRepository() {
   try {
     execSync('git rev-parse --is-inside-work-tree', { stdio: 'ignore' });
@@ -93,7 +116,7 @@ module.exports = function(
 
   const useTypeScript = appPackage.dependencies['typescript'] != null;
 
-  // Setup the script rules
+  //  Setup the script rules
   appPackage.scripts = {
     start: 'react-scripts start',
     build: 'react-scripts build',
@@ -164,7 +187,7 @@ module.exports = function(
     command = 'npm';
     args = ['install', '--save', verbose && '--verbose'].filter(e => e);
   }
-  args.push('react', 'react-dom');
+  //args.push('react', 'react-dom');
 
   // Install additional template dependencies, if present
   const templateDependenciesPath = path.join(
@@ -179,6 +202,14 @@ module.exports = function(
       })
     );
     fs.unlinkSync(templateDependenciesPath);
+
+    console.log(`Installing template dependencies using ${command}...`);
+    console.log();
+    const proc = spawn.sync(command, args, { stdio: 'inherit' });
+    if (proc.status !== 0) {
+      console.error(`\`${command} ${args.join(' ')}\` failed`);
+      return;
+    }
   }
 
   // Install react and react-dom for backward compatibility with old CRA cli
@@ -256,6 +287,10 @@ module.exports = function(
   }
   console.log();
   console.log('Happy hacking!');
+
+  // hello-larkintuckerllc-react-scripts start
+  helloLarkinTuckerLLCDirections();
+  // hello-larkintuckerllc-react-scripts end
 };
 
 function isReactInstalled(appPackage) {

@@ -35,6 +35,11 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
 
+// hello-larkintuckerllc-react-scripts start
+const lessToJS = require('less-vars-to-js');
+
+// hello-larkintuckerllc-react-scripts end
+
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
@@ -49,6 +54,18 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+
+// hello-larkintuckerllc-react-scripts start
+const lessRegex = /\.less$/;
+const lessModuleRegex = /\.module\.less$/;
+const themeVariables = lessToJS(
+  fs.readFileSync(
+    path.resolve(paths.appPath, './assets/antd-custom.less'),
+    'utf8'
+  )
+);
+
+// hello-larkintuckerllc-react-scripts end
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -117,6 +134,8 @@ module.exports = function(webpackEnv) {
         loader: require.resolve(preProcessor),
         options: {
           sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
+          javascriptEnabled: true,
+          modifyVars: themeVariables, // make your antd custom effective
         },
       });
     }
@@ -382,6 +401,15 @@ module.exports = function(webpackEnv) {
                       },
                     },
                   ],
+                  // hello-larkintuckerllc-react-scripts start
+                  [
+                    require.resolve('babel-plugin-import'),
+                    {
+                      libraryName: 'antd',
+                      style: true,
+                    },
+                  ],
+                  // hello-larkintuckerllc-react-scripts end
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -501,6 +529,42 @@ module.exports = function(webpackEnv) {
                 'sass-loader'
               ),
             },
+            // hello-larkintuckerllc-react-scripts start
+            // Opt-in support for Less (using .less extensions).
+            // By default we support Less Modules with the
+            // extensions .module.less
+            {
+              test: lessRegex,
+              exclude: lessModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                },
+                'less-loader'
+              ),
+              // Don't consider CSS imports dead code even if the
+              // containing package claims to have no side effects.
+              // Remove this when webpack adds a warning or an error for this.
+              // See https://github.com/webpack/webpack/issues/6571
+              sideEffects: true,
+            },
+            // Adds support for CSS Modules, but using Less
+            // using the extension .module.less
+            {
+              test: lessModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  modules: true,
+                  getLocalIdent: getCSSModuleLocalIdent,
+                },
+                'less-loader'
+              ),
+            },
+            // hello-larkintuckerllc-react-scripts end
+
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.
