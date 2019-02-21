@@ -3,8 +3,8 @@ import { Layout, Menu } from 'antd';
 import { Route, Link } from 'react-router-dom';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
-import AntdDemo from './pages/antd-demo';
-import ApolloDemo from './pages/apollo-demo';
+import AntdDemo from '../pages/antd-demo';
+import ApolloDemo from '../pages/apollo-demo';
 import styles from './BaseLayout.less';
 
 const { Header, Content } = Layout;
@@ -73,11 +73,7 @@ const BaseLayout = () => {
       </Content>
     </Layout>
   );
-  return (
-    <ContainerQuery query={query}>
-      {params => <div className={classNames(params)}>{layout}</div>}
-    </ContainerQuery>
-  );
+  return <ContainerQuery query={query}>{params => <div className={classNames(params)}>{layout}</div>}</ContainerQuery>;
 };
 
 const HomePage = () => <div>This is a Home Page</div>;
