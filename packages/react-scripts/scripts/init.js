@@ -25,24 +25,9 @@ const verifyTypeScriptSetup = require('./utils/verifyTypeScriptSetup');
 
 // hello-larkintuckerllc-react-scripts start
 function helloLarkinTuckerLLCDirections() {
-  console.log(chalk.yellow('Hello React + Antd + Apollo Starter'));
-  console.log(
-    'To enable eslint and prettier with airbnb style please intall following:'
-  );
   console.log();
-
-  console.log(chalk.cyan('yarn add eslint babel-eslint --dev'));
-
-  console.log(chalk.cyan('npx install-peerdeps --dev eslint-config-airbnb'));
-
-  console.log(
-    chalk(
-      'yarn add prettier eslint-config-prettier eslint-plugin-prettier --dev'
-    )
-  );
-
+  console.log(chalk.yellow('Antd,Apollo,Airbnb Ready Now !'));
   console.log();
-  console.log(chalk.cyan(`  @primary-color: #198c3b `));
 }
 // hello-larkintuckerllc-react-scripts end
 
